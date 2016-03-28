@@ -94,17 +94,23 @@ namespace lab_Notebook
 
         private void addRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dgv1.ReadOnly = false;
-            MessageBox.Show("Чтобы добавить запись необходимо ввести желаемые значения в таблицу и нажать на Save");
+        
+            dataView = new DataView(AuthorsDataSet.Tables["notebook"]);
+            ForAddRow form = new ForAddRow();
+            form.Show();
+            //WorkWithDataBase notebook = new WorkWithDataBase();
+
+            //notebook.AddNewDataRowView(dataView);
+           // MessageBox.Show("Чтобы добавить запись необходимо ввести желаемые значения в таблицу и нажать на Save");
 
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataView = new DataView(AuthorsDataSet.Tables["notebook"]);
-            WorkWithDataBase notebook = new WorkWithDataBase();
-            string fileName = "notebook.xml";
-            notebook.addSave(dataView, fileName);
+            
+            ForAddRow additionalform = new ForAddRow();
+            additionalform.Show();
+            
         }
 
        

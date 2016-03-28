@@ -2,7 +2,9 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Text;
+
 namespace lab_Notebook
+   
 {
     class WorkWithDataBase
     {
@@ -59,12 +61,31 @@ namespace lab_Notebook
          }
         public void addSave(DataView dataView, string fileName)
         {
+            
+
             XmlWriter xmlFileW;
             xmlFileW = XmlWriter.Create(fileName);
             dataView.ToTable("notebook");
             MyNotebook form = new MyNotebook();
             form.AuthorsDataSet.WriteXml(xmlFileW);
             xmlFileW.Close();
+        }
+
+        public void AddNewDataRowView(DataView dataView)
+        {
+            DataRowView rowView = dataView.AddNew();
+
+            // Change values in the DataRow.
+        ForAddRow  additionalform = new ForAddRow();
+           
+            rowView["Name"] = additionalform.txbName.Text;
+            rowView["Surname"] = additionalform.txbSurName.Text;
+             rowView["City"] = additionalform.txbCity.Text;
+             rowView["PhoneNumber"] = additionalform.txbPhone.Text;
+             rowView["BirhDate"] = additionalform.txbBirth.Text;
+            rowView.EndEdit();
+            MyNotebook form = new MyNotebook();
+            form.dgv1.DataSource = rowView; 
         }
     }
 }
